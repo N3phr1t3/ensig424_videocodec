@@ -1,4 +1,4 @@
-function coefficients = forward_transform(block, params)
+function coefficients = forward_transform() % block, params
 n = params.transformBlockSize(1);
 [H0, W0] = size(block); 
 H = 8 * ceil(H0 / 8);
