@@ -1,9 +1,14 @@
-function block = inverse_transform() % Inputs: coefficients, params
+function inverse_transform(M_coeff, params, outfile)
 n = params.transformBlockSize(1);
-block = zeros(size(coefficients));
-for i = 1:n:size(coefficients, 1)
-    for j = 1:n:size(coefficients, 2)
-        block(i:i+n-1, j:j+n-1) = idct2(coefficients(i:i+n-1, j:j+n-1));
+mData = zeros(size(M_coeff));
+for i = 1:n:size(M_coeff, 1)
+    for j = 1:n:size(M_coeff, 2)
+        mData(i:i+n-1, j:j+n-1) = idct2(M_coeff(i:i+n-1, j:j+n-1));
     end
 end
+v = mData.';
+v = v(:);
+fid = fopen(outfile, 'a');
+fwrite(fid, v, 'ubit8');
+fclose(fid);
 end
